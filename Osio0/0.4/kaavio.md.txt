@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant browser
+    participant server
+    
+     Note right of browser: Save nappia painaessa serverille menee POST metodi
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    Note right of server: Uusi viesti lisätään data.json
+    server-->>browser: 
+    Note left of server: Post metodi palauttaa 302 ja uudelleen ohjaa kutsuun -> /notes
+    deactivate server
+
+        browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+
+
+    Note right of browser: POST metodin jälkeen, sivu latautuu uudestaan
+    server-->>browser: [{ "content": "Uusin note", "date": "2024-5-20" }, ... ]
+    deactivate server    
+
+    Note right of browser: Lopulta sivu palauttaa päivitetyn version json tiedostosta 
+    
+   

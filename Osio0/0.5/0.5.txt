@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant browser
+    participant server
+    
+     Note right of browser: Sivun latautuessa pyydetään sivun rakenne GET metodilla
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: Palauttaa sivun rakenteen HTML dokumentti
+    deactivate server
+    Note right of browser: Tämän jälkee nhaetaan sivun tyyli
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+        activate server
+    server-->>browser: Palauttaa sivun CSS tyylittelyt
+    deactivate server
+        Note right of browser: Vimeiseksi haetaan sivun logiikan sisältävä JS tiedosto
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+        activate server
+    server-->>browser: spa.js
+    deactivate server
